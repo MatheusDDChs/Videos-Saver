@@ -1,5 +1,6 @@
 import { ChevronRightIcon, Trash, CheckCircle, Circle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Button from './button'
 
   type Video = {
     id: string;
@@ -48,15 +49,14 @@ function Videos({ videos , onVideoClick, onDeleteVideo}: VideosProps) {
             
             </li>
 
-            <button onClick={() => onShowVideoClick(video)}
-            className="cursor-pointer text-white bg-slate-500 p-3 px-5 rounded-md shadow">
+            <Button onClick={() => onShowVideoClick(video)}>
               <ChevronRightIcon/>
-            </button>
+            </Button>
 
-            <button onClick={() => onDeleteVideo(video.id)}
-             className="cursor-pointer text-white bg-slate-500 p-3 px-5 rounded-md shadow">
+            <Button onClick={() => onDeleteVideo(video.id)}
+             >
               <Trash />
-            </button>
+            </Button>
 
           </ul>
           

@@ -1,13 +1,13 @@
 import { ChevronRightIcon, Trash, CheckCircle, Circle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import Button from './button'
+import Button from "./button";
 
-  type Video = {
-    id: string;
-    title: string;
-    link: string;
-    isCompleted: boolean
-  };
+type Video = {
+  id: string;
+  title: string;
+  link: string;
+  isCompleted: boolean;
+};
 
 type VideosProps = {
   videos: Video[];
@@ -15,53 +15,46 @@ type VideosProps = {
   onDeleteVideo: (videoId: string) => void;
 };
 
+function Videos({ videos, onVideoClick, onDeleteVideo }: VideosProps) {
+  const navigate = useNavigate();
 
-function Videos({ videos , onVideoClick, onDeleteVideo}: VideosProps) {
-
-  
-
-  const navigate = useNavigate()
-
-  function onShowVideoClick(videos:Video) {
-    navigate(`/video?title=${videos.title}&link=${videos.link}`)
+  function onShowVideoClick(videos: Video) {
+    navigate(`/video?title=${videos.title}&link=${videos.link}`);
   }
 
   return (
     <div>
       <ul className="space-y-2 bg-amber-100 rounded-2xl p-6 flex flex-col w-lg center justify-self-center gap-3 shadow">
-
-      {/*  TYPESCRIPT */}
+        {/*  TYPESCRIPT */}
         {videos.map((video) => (
           <ul className="flex justify-between gap-3">
-            <li key={video.id} className=" bg-slate-500 p-6 rounded-md shadow gap-3 w-full text-left">
-              
+            <li
+              key={video.id}
+              className=" bg-slate-500 p-6 rounded-md shadow gap-3 w-full text-left"
+            >
               <a
                 href={video.link}
                 rel="noopener noreferrer"
                 className={`text-white font-bold hover:underline flex gap-3
                  ${video.isCompleted && "line-through"}`}
-                onClick={() => {onVideoClick(video.id)}}
+                onClick={() => {
+                  onVideoClick(video.id);
+                }}
               >
                 {video.title}
-                {video.isCompleted ? <CheckCircle/> : <Circle/>}
+                {video.isCompleted ? <CheckCircle /> : <Circle />}
               </a>
-            
-            
             </li>
 
             <Button onClick={() => onShowVideoClick(video)}>
-              <ChevronRightIcon/>
+              <ChevronRightIcon />
             </Button>
 
-            <Button onClick={() => onDeleteVideo(video.id)}
-             >
+            <Button onClick={() => onDeleteVideo(video.id)}>
               <Trash />
             </Button>
-
           </ul>
-          
         ))}
-
       </ul>
     </div>
   );

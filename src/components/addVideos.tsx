@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Input from './Input'
-
+import Input from "./Input";
 
 type Props = {
   addVideosSubmit: (title: string, link: string) => void;
@@ -20,14 +19,14 @@ function AddVideoForm({ addVideosSubmit }: Props) {
     addVideosSubmit(title, link);
     setTitle(""); // limpa os campos
     setLink("");
-  }
+  };
 
   return (
     <form
       onSubmit={handleSubmit}
       className="space-y-2 bg-amber-100 rounded-2xl p-6 flex flex-col w-lg justify-self-center gap-3 shadow items-center"
     >
-      <Input 
+      <Input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         type="text"
@@ -54,4 +53,4 @@ function AddVideoForm({ addVideosSubmit }: Props) {
   );
 }
 
-export default AddVideoForm
+export default AddVideoForm;

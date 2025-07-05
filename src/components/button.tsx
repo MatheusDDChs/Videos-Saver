@@ -4,9 +4,12 @@ type ButtonProps = {
   className?: string;
 };
 
-function Button({ children, onClick, className }: ButtonProps) {
+function Button({ children, onClick }: ButtonProps) {
   return (
-    <button onClick={onClick} className={className} className="cursor-pointer text-white bg-slate-500 p-3 px-5 rounded-md shadow">
+    <button
+      onClick={onClick}
+      className="cursor-pointer text-white bg-slate-500 p-3 px-5 rounded-md shadow"
+    >
       {children}
     </button>
   );

@@ -1,11 +1,17 @@
 import { useState } from "react";
 import Input from "./Input";
+import Button from "./button";
 
 type Props = {
-  addVideosSubmit: (title: string, link: string) => void;
+  addVideosSubmit: (
+    title: string,
+    link: string,
+    groupId: string | null
+  ) => void;
+  selectedGroupId: string | null;
 };
 
-function AddVideoForm({ addVideosSubmit }: Props) {
+function AddVideoForm({ addVideosSubmit, selectedGroupId }: Props) {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
 
@@ -13,42 +19,52 @@ function AddVideoForm({ addVideosSubmit }: Props) {
     e.preventDefault();
 
     if (!title.trim() || !link.trim()) {
-      return window.alert("Por favor, adicione algum Título e Link.");
+      window.alert("Por favor, adicione um título e um link.");
+      return;
     }
 
-    addVideosSubmit(title, link);
-    setTitle(""); // limpa os campos
+    addVideosSubmit(title.trim(), link.trim(), selectedGroupId);
+    setTitle("");
     setLink("");
   };
 
   return (
     <form
+      className="flex-1 flex-col p-6 bg-slate-800 rounded text-center justify-center w-[100%] "
       onSubmit={handleSubmit}
-      className="space-y-2 bg-amber-100 rounded-2xl p-6 flex flex-col w-lg justify-self-center gap-3 shadow items-center"
     >
-      <Input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        type="text"
-        id="videoTitle"
-        placeholder="Título"
-      />
-
-      <Input
-        value={link}
-        onChange={(e) => setLink(e.target.value)}
-        type="text"
-        id="videoLink"
-        placeholder="Link"
-      />
-
-      <button
-        id="addButton"
-        type="submit"
-        className="cursor-pointer text-white w-96 bg-slate-500 p-3 px-5 rounded shadow font-bold"
-      >
+      <h2 className="text-xl mb-4 font-semibold text-center text-white">
         Adicionar Vídeo
-      </button>
+      </h2>
+
+      <div className="flex items-center gap-3 flex-col mb-4">
+        <Input
+          maxLength={45}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          type="text"
+          id="videoTitle"
+          placeholder="Título"
+        />
+        <Input
+          value={link}
+          onChange={(e) => setLink(e.target.value)}
+          type="text"
+          id="videoLink"
+          placeholder="Link do vídeo (YouTube, etc)"
+        />
+      </div>
+
+      <div className="mb-3 text-slate-300 text-sm">
+        Grupo selecionado:{"  "}
+        <span className="font-semibold">
+          {selectedGroupId ? selectedGroupId : "Nenhum"}
+        </span>
+      </div>
+
+      <Button type="submit" disabled={!selectedGroupId}>
+        {selectedGroupId ? "Enviar" : "Selecione um grupo antes"}
+      </Button>
     </form>
   );
 }

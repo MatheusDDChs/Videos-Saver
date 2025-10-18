@@ -6,9 +6,9 @@ type ButtonProps = {
 
 function Button({ children, onClick }: ButtonProps) {
   return (
-    <button
+    <button 
       onClick={onClick}
-      className="cursor-pointer text-white bg-slate-500 p-3 px-5 rounded-md shadow"
+      className="bg-pink-600 hover:bg-pink-700 transition-colors text-white px-4 py-2 rounded-full mt-2 shadow-md w-1/2 cursor-pointer"
     >
       {children}
     </button>

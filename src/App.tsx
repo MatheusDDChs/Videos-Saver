@@ -36,6 +36,8 @@ function App() {
     setSelectedGroupId(id);
   }
 
+  const selectedGroup = groups.find((g) => g.id === selectedGroupId);
+
   // ======= VIDEOS =======
   const [videos, setVideos] = useState<Video[]>(() => {
     const saved = localStorage.getItem("videos");
@@ -108,6 +110,8 @@ function App() {
             addVideosSubmit={(title, link) =>
               handleAddVideo(title, link, selectedGroupId)
             }
+            selectedGroupId={selectedGroupId}
+            selectedGroupName={selectedGroup ? selectedGroup.name : null}
           />
 
           {/* ======= GRUPOS ======= */}

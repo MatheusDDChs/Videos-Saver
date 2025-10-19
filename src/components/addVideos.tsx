@@ -9,9 +9,14 @@ type Props = {
     groupId: string | null
   ) => void;
   selectedGroupId: string | null;
+  selectedGroupName: string | null;
 };
 
-function AddVideoForm({ addVideosSubmit, selectedGroupId }: Props) {
+function AddVideoForm({
+  addVideosSubmit,
+  selectedGroupId,
+  selectedGroupName,
+}: Props) {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
 
@@ -39,7 +44,6 @@ function AddVideoForm({ addVideosSubmit, selectedGroupId }: Props) {
 
       <div className="flex items-center gap-3 flex-col mb-4">
         <Input
-          maxLength={45}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           type="text"
@@ -56,9 +60,9 @@ function AddVideoForm({ addVideosSubmit, selectedGroupId }: Props) {
       </div>
 
       <div className="mb-3 text-slate-300 text-sm">
-        Grupo selecionado:{"  "}
+        Grupo selecionado:{" "}
         <span className="font-semibold">
-          {selectedGroupId ? selectedGroupId : "Nenhum"}
+          {selectedGroupName ? selectedGroupName : "Nenhum"}
         </span>
       </div>
 

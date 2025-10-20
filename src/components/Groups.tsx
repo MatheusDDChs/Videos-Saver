@@ -9,7 +9,7 @@ type GroupsProps = {
   groups: Group[];
   selectedGroupId: string | null;
   onAddGroup: (name: string) => void;
-  onSelectGroup: (id: string) => void;
+  onSelectGroup: (id: string | null) => void;
   children?: React.ReactNode;
 };
 

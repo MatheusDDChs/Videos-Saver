@@ -1,4 +1,8 @@
-function Input(props: object) {
+import React from "react";
+
+type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+
+function Input(props: InputProps) {
   return (
     <input
       maxLength={40}

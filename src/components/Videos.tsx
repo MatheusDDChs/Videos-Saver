@@ -43,7 +43,11 @@ function Videos({
   function toggleExpand(videoId: string) {
     setExpanded((prev) => {
       const newSet = new Set(prev);
-      newSet.has(videoId) ? newSet.delete(videoId) : newSet.add(videoId);
+      if (newSet.has(videoId)) {
+        newSet.delete(videoId);
+      } else {
+        newSet.add(videoId);
+      }
       return newSet;
     });
   }

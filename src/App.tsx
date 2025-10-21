@@ -99,11 +99,11 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-900 text-slate-100 font-mono">
-      <header className="bg-slate-800 py-4 shadow-md text-center text-2xl font-bold tracking-wider w-full">
+      <header className="bg-slate-800 py-4 shadow-md text-center text-2xl font-bold tracking-wider">
         🎬 Video-Saver
       </header>
 
-      <main className="flex flex-col lg:flex-row items-center">
+      <main className=" flex-col lg:flex-row items-center  text-center flex justify-center gap-2 mt-8">
         {/* ======= FORMULÁRIO ======= */}
         <div className="flex flex-col w-md p-4 items-center">
           <AddVideoForm
@@ -125,7 +125,7 @@ function App() {
           </Groups>
         </div>
 
-        <div className="w-[2px] bg-slate-600"></div>
+        <div className="w-auto1 bg-slate-600"></div>
 
         {/* ======= VÍDEOS ======= */}
         <Videos

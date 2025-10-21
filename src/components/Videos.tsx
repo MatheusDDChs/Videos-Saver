@@ -70,10 +70,12 @@ function Videos({
   }
 
   return (
-    <div className="flex-1 p-6">
-      <h2 className="text-xl mb-4 font-semibold text-center">Meus Vídeos</h2>
+    <div className="max-w-6xl">
+      <h2 className="text-xl max-w-4xl mb-2 relative font-semibold text-center">
+        Meus Vídeos
+      </h2>
 
-      <ul className="bg-slate-800 rounded-lg shadow hover:shadow-lg transition p-4">
+      <ul className="bg-slate-800 rounded-lg shadow hover:shadow-lg transition p-4 max-w-3xl  items">
         {videos.map((video) => {
           const isOpen = expanded.has(video.id);
           const isMenuOpen = showGroupMenu === video.id;
@@ -84,9 +86,9 @@ function Videos({
           return (
             <li
               key={video.id}
-              className="bg-slate-700 my-3 rounded-lg shadow p-4 flex flex-col gap-3 relative"
+              className="bg-slate-700 my-3 rounded-lg shadow p-4 flex flex-col gap-3 relative max-w-3xl "
             >
-              <div className="flex justify-between items-center gap-3">
+              <div className="flex justify-between items-center gap-3 ">
                 <button
                   onClick={() => onVideoClick(video.id)}
                   className={`text-white font-bold flex gap-2 items-center hover:underline text-lg ${
@@ -152,15 +154,15 @@ function Videos({
 
               <div
                 className={`transition-all duration-300 overflow-hidden ${
-                  isOpen ? "max-h-[500px] mt-3" : "max-h-0"
+                  isOpen ? "max-h-[650px] mt-3" : "max-h-0"
                 }`}
               >
                 {isOpen && (
                   <iframe
                     src={getEmbedLink(video.link)}
                     title={video.title}
-                    className="w-full h-64 rounded-lg"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    className="w-full h-[296px] rounded-lg"
+                    allow="accelerometer; setVolume(volume:50); autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   />
                 )}
               </div>

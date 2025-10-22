@@ -75,7 +75,7 @@ function Videos({
         Meus Vídeos
       </h2>
 
-      <ul className="bg-slate-800 rounded-lg shadow hover:shadow-lg transition p-4 max-w-3xl  items">
+      <ul className="bg-slate-800 rounded-lg shadow hover:shadow-lg transition p-4 max-w-3xl mb-6 items">
         {videos.map((video) => {
           const isOpen = expanded.has(video.id);
           const isMenuOpen = showGroupMenu === video.id;
@@ -88,7 +88,7 @@ function Videos({
               key={video.id}
               className="bg-slate-700 my-3 rounded-lg shadow p-4 flex flex-col gap-3 relative max-w-3xl "
             >
-              <div className="flex justify-between items-center gap-3 ">
+              <div className="flex justify-between items-center gap-3">
                 <button
                   onClick={() => onVideoClick(video.id)}
                   className={`text-white font-bold flex gap-2 items-center hover:underline text-lg ${

@@ -66,9 +66,7 @@ function AddVideoForm({
         </span>
       </div>
 
-      <Button type="submit">
-        {selectedGroupId ? "Enviar" : "Selecione um grupo antes"}
-      </Button>
+      <Button type="submit">{"Enviar"}</Button>
     </form>
   );
 }

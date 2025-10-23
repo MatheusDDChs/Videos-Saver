@@ -14,12 +14,247 @@
       body {
         font-family: "Fira Code", monospace;
       }
+
+      .seo {
+        display: none;
+      }
     </style>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Video-Saver",
+        "url": "https://video-saver.com.br/",
+        "description": "Gerenciador pessoal de vídeos com grupos, tags e marcação de assistido.",
+        "author": { "@type": "Person", "name": "Matheus Diedrichs" },
+        "applicationCategory": "Education",
+        "operatingSystem": "All"
+      }
+    </script>
 
     <title>Video Saver</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <div class="seo">
+      <header role="banner">
+        <h1>Video-Saver</h1>
+        <p>
+          Gerencie e organize seus vídeos favoritos. Crie grupos. Marque vídeos
+          assistidos. Armazene links do YouTube, Vimeo e outros.
+        </p>
+        <nav aria-label="Navegação principal">
+          <ul>
+            <li><a href="#adicionar-video">Adicionar vídeo</a></li>
+            <li><a href="#meus-videos">Meus vídeos</a></li>
+            <li><a href="#meus-grupos">Meus grupos</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main role="main">
+        <!-- Formulário para adicionar vídeo -->
+        <section id="adicionar-video" aria-labelledby="adicionar-video-title">
+          <h2 id="adicionar-video-title">Adicionar Vídeo</h2>
+          <form
+            id="form-add-video"
+            action="/api/videos"
+            method="post"
+            novalidate
+          >
+            <label for="titulo">Título</label>
+            <input
+              id="titulo"
+              name="titulo"
+              type="text"
+              inputmode="text"
+              placeholder="Título do vídeo"
+              required
+            />
+            <label for="url">Link do vídeo (YouTube, Vimeo, etc.)</label>
+            <input
+              id="url"
+              name="url"
+              type="url"
+              placeholder="https://..."
+              required
+            />
+            <label for="grupo">Grupo</label>
+            <select id="grupo" name="grupo">
+              <option value="">Nenhum</option>
+              <option value="programacao">Programação</option>
+              <option value="mentalidade">Mentalidade</option>
+              <option value="musicas">Músicas</option>
+            </select>
+            <label for="descricao">Descrição</label>
+            <textarea
+              id="descricao"
+              name="descricao"
+              rows="3"
+              placeholder="Notas ou observações"
+            ></textarea>
+            <button type="submit">Adicionar</button>
+          </form>
+          <p class="meta">
+            API disponível em /api/videos. Suporta POST com JSON {titulo, url,
+            grupo, descricao}.
+          </p>
+        </section>
+        <!-- Lista de grupos -->
+        <aside id="meus-grupos" aria-labelledby="meus-grupos-title">
+          <h2 id="meus-grupos-title">Meus Grupos</h2>
+          <form
+            id="form-novo-grupo"
+            action="/api/grupos"
+            method="post"
+            novalidate
+          >
+            <label for="novo-grupo">Novo grupo</label>
+            <input
+              id="novo-grupo"
+              name="nome"
+              type="text"
+              placeholder="Nome do grupo"
+            />
+            <button type="submit">Criar</button>
+          </form>
+          <nav aria-label="Lista de grupos">
+            <ul>
+              <li data-grupo="todos"><strong>Todos</strong></li>
+              <li data-grupo="programacao">Programação</li>
+              <li data-grupo="mentalidade">Mentalidade</li>
+              <li data-grupo="musicas">Músicas</li>
+            </ul>
+          </nav>
+        </aside>
+        <!-- Lista de vídeos -->
+        <section id="meus-videos" aria-labelledby="meus-videos-title">
+          <h2 id="meus-videos-title">Meus Vídeos</h2>
+          <!-- Exemplo de item de vídeo -->
+          <ul id="lista-videos" aria-live="polite">
+            <li
+              class="video-item"
+              data-id="1"
+              data-grupo="mentalidade"
+              itemscope
+              itemtype="https://schema.org/VideoObject"
+            >
+              <article>
+                <h3 itemprop="name">Como seu cérebro escolhe o que lembrar</h3>
+                <p class="badge" itemprop="genre">Mentalidade</p>
+                <p itemprop="description">
+                  Resumo curto do vídeo e por que vale salvar.
+                </p>
+                <p class="meta">
+                  <a
+                    itemprop="url"
+                    href="https://youtube.com/watch?v=exemplo"
+                    rel="nofollow"
+                    >Link do vídeo</a
+                  >
+                  • <time datetime="2025-10-20">Adicionado em 20 out 2025</time>
+                </p>
+                <div class="actions" aria-hidden="false">
+                  <button data-action="toggle-watched" aria-pressed="false">
+                    Marcar como assistido
+                  </button>
+                  <button data-action="editar">Editar</button>
+                  <button data-action="remover">Remover</button>
+                </div>
+              </article>
+            </li>
+            <!-- Outro item -->
+            <li
+              class="video-item"
+              data-id="2"
+              data-grupo="programacao"
+              itemscope
+              itemtype="https://schema.org/VideoObject"
+            >
+              <article>
+                <h3 itemprop="name">
+                  Frontend chamando Backend (ReactJS + Axios)
+                </h3>
+                <p class="badge" itemprop="genre">Programação</p>
+                <p itemprop="description">
+                  Demonstração prática de chamadas HTTP usando Axios no React.
+                </p>
+                <p class="meta">
+                  <a
+                    itemprop="url"
+                    href="https://youtube.com/watch?v=exemplo2"
+                    rel="nofollow"
+                    >Link do vídeo</a
+                  >
+                  • <time datetime="2025-09-12">Adicionado em 12 set 2025</time>
+                </p>
+                <div class="actions">
+                  <button data-action="toggle-watched">
+                    Marcar como assistido
+                  </button>
+                  <button data-action="editar">Editar</button>
+                  <button data-action="remover">Remover</button>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+        <!-- Área de busca e filtros -->
+        <section id="filtros" aria-labelledby="filtros-title">
+          <h2 id="filtros-title">Busca e filtros</h2>
+          <form id="form-filtro" role="search">
+            <label for="q">Pesquisar</label>
+            <input
+              id="q"
+              name="q"
+              type="search"
+              placeholder="Buscar por título, descrição ou tag"
+            />
+            <label for="filtro-grupo">Filtrar por grupo</label>
+            <select id="filtro-grupo" name="grupo">
+              <option value="">Todos</option>
+              <option value="programacao">Programação</option>
+              <option value="mentalidade">Mentalidade</option>
+            </select>
+            <button type="submit">Aplicar</button>
+          </form>
+        </section>
+        <!-- Sobre o projeto -->
+        <section id="sobre" aria-labelledby="sobre-title">
+          <h2 id="sobre-title">Sobre o Video-Saver</h2>
+          <p>
+            Video-Saver é um projeto pessoal para organizar vídeos e conteúdos
+            de aprendizado. Permite criar grupos, salvar links, adicionar notas
+            e marcar vídeos assistidos. Projeto open-source. Código disponível
+            no repositório público.
+          </p>
+          <p>Funcionalidades chave:</p>
+          <ul>
+            <li>Adicionar e editar vídeos por URL.</li>
+            <li>Categorizar por grupos e tags.</li>
+            <li>Marcar vídeos como assistidos.</li>
+            <li>Pesquisa por título e descrição.</li>
+            <li>API REST simples para integração.</li>
+          </ul>
+        </section>
+      </main>
+      <footer role="contentinfo">
+        <p>© 2025 Desenvolvido por Matheus Diedrichs. Projeto Video-Saver.</p>
+        <p>
+          Contato:
+          <a href="mailto:contato@seudominio.com">contato@seudominio.com</a>
+        </p>
+      </footer>
+      <!-- Observações para indexação e acessibilidade -->
+      <noscript>
+        <p>
+          Este site funciona parcialmente sem JavaScript. Use o formulário para
+          adicionar vídeos.
+        </p>
+      </noscript>
+    </div>
   </body>
 </html>

@@ -68,6 +68,8 @@ This project requires the following dependencies:
 
 ### Installation
 
+Video-Saver is also online, on this website: <a href="https://video-saver.com.br/">Click Here!</a>
+
 Build Videos-Saver from the source and intsall dependencies:
 
 1. **Clone the repository:**
